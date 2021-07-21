@@ -3,9 +3,10 @@ const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const fs = require("fs");
+const path  = require("path");
 
 const allTeamMembers = [];
-const generateHTML = require("./util/generateHtml");
+const generateHtml = require("./util/generateHtml");
 
 function init() {
     console.log("Building Team Profile.......");
@@ -70,11 +71,14 @@ function buildTeam() {
             } else {
                 console.log("generating HTML  using ", allTeamMembers);
                 //Create a HTML using FS package along with the generatehtml 
-                const htmlPageContent = generateHTML(allTeamMembers);
-                console.log(htmlPageContent);
+                const htmlPageContent = generateHtml(allTeamMembers);
+
+                const  OUTPUT_DIR  = path.resolve(__dirname, "dist"); 
                 
-                fs.writeFile('index.html', htmlPageContent, (err) =>
-                    err ? console.log(err) : console.log('Successfully created index.html!')
+                const fileName =  path.join(OUTPUT_DIR,  "team.html");
+
+                fs.writeFile(fileName, htmlPageContent, (err) =>
+                    err ? console.log(err) : console.log(`Successfully created !${fileName}`)
                 );
 
             }

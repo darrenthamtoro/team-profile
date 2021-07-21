@@ -81,7 +81,7 @@ const generateTeam = team => {
 
 // export function to generate entire page
 module.exports = team => {
-
+console.log("Inside generate HTML", team);
     return `
     <!DOCTYPE html>
 <html lang="en">
